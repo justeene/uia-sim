@@ -17,7 +17,7 @@
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-core</artifactId>
-			<version>2.17.1</version>
+			<version>2.18.0</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
@@ -28,7 +28,7 @@
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
-			<version>[2.8.9,)</version>
+			<version>2.10.1</version>
 		</dependency>
 	</dependencies>
 	<organization>
@@ -49,6 +49,19 @@
 			        </formats>
 			        <check />
 			    </configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>3.0.1</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
