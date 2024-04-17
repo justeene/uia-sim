@@ -2,6 +2,7 @@ package uia.sim;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.PriorityQueue;
 import java.util.UUID;
 import java.util.Vector;
 import java.util.concurrent.ExecutorService;
@@ -55,7 +56,7 @@ public class Env {
 
     protected int initialTime;
 
-    protected PriorityBlockingQueue<Job> jobs;
+    protected PriorityQueue<Job> jobs;
 
     private int now;
 
@@ -106,7 +107,7 @@ public class Env {
      */
     public Env(String id, int initialTime) {
         this.id = id;
-        this.jobs = new PriorityBlockingQueue<>();
+        this.jobs = new PriorityQueue<>();
         this.executor = Executors.newFixedThreadPool(1);
         this.listener = new EnvListenerAdapter();
         this.now = Math.max(0, initialTime);
