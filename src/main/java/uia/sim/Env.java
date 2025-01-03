@@ -56,7 +56,7 @@ public class Env {
 
     protected int initialTime;
 
-    protected PriorityQueue<Job> jobs;
+    protected PriorityBlockingQueue<Job> jobs;
 
     private int now;
 
@@ -107,7 +107,7 @@ public class Env {
      */
     public Env(String id, int initialTime) {
         this.id = id;
-        this.jobs = new PriorityQueue<>();
+        this.jobs = new PriorityBlockingQueue<>();
         this.executor = Executors.newFixedThreadPool(1);
         this.listener = new EnvListenerAdapter();
         this.now = Math.max(0, initialTime);
@@ -569,7 +569,9 @@ public class Env {
         if (!result.isEmpty()) {
             throw result.get(0);
         }
-        return jobs.size();
+        int jobSize=jobs.size();
+//        logger.warn("job size:{}",jobSize);
+        return jobSize;
     }
 
     private void raiseRunning(int time, String message) {

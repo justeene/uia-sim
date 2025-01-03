@@ -19,6 +19,9 @@ public class RealtimeEnvTest {
         this.env.process("pupil-1", this::pupil);
         this.env.process("pupil-2", this::pupil);
         this.env.process("pupil-3", this::pupil);
+        this.env.process("pupil-4", this::pupil);
+        this.env.process("pupil-5", this::pupil);
+        this.env.process("pupil-6", this::pupil);
         this.env.process("bell", this::bell);
     }
 
@@ -29,7 +32,6 @@ public class RealtimeEnvTest {
             System.out.println(String.format("\n%3d> begin", this.env.getNow()));
 
             yield.call(this.env.timeout(45));
-
             this.classEnd.succeed(null);
             this.classEnd = this.env.event("classEnd");		// update event
             System.out.println(String.format("\n%3d> end", this.env.getNow()));

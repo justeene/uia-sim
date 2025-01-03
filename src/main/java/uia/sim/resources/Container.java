@@ -3,6 +3,8 @@ package uia.sim.resources;
 import uia.sim.Env;
 import uia.sim.SimException;
 
+import java.util.UUID;
+
 /**
  * A amount based container.
  *
@@ -35,6 +37,10 @@ public final class Container extends BaseResource<Container> {
         return new Request(this, id, planUsage);
     }
 
+    public Request request() throws SimException {
+        return new Request(this, UUID.randomUUID().toString(), 1);
+    }
+
     /**
      * Adds new amount to the container.
      *
@@ -44,6 +50,9 @@ public final class Container extends BaseResource<Container> {
      */
     public Release release(String id, int amount) {
         return new Release(this, id, amount);
+    }
+    public Release release( int amount) {
+        return new Release(this, UUID.randomUUID().toString(), amount);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package uia.sim.resources;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 import uia.sim.Env;
 
@@ -36,6 +37,14 @@ public final class Resource extends BaseResource<Resource> {
      */
     public Request request(String id) {
         return new Request(this, id);
+    }
+    /**
+     * Requests a resource.
+     *=
+     * @return The request event.
+     */
+    public Request request() {
+        return new Request(this, UUID.randomUUID().toString());
     }
 
     /**

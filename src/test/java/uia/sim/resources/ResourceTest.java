@@ -13,7 +13,7 @@ public class ResourceTest {
     @Test
     public void test1() throws Exception {
         final Env env = new Env();
-        final Resource res = new Resource(env, 2);
+        final Resource res = new Resource(env, 1);
 
         env.process(new Car1("car1", res, 100));
         env.process(new Car1("car2", res, 110));
@@ -36,6 +36,19 @@ public class ResourceTest {
             y.call(env.timeout(130));
             car3.interrupt("can not wait");
         });
+
+        env.run();
+    }
+
+    @Test
+    public void test3() throws Exception {
+        final Env env = new Env();
+        final Resource res = new Resource(env, 3);
+
+        env.process(new Car3("car1", res, 100));
+        env.process(new Car3("car2", res, 110));
+        env.process(new Car3("car3", res, 90));
+        env.process(new Car3("car4", res, 120));
 
         env.run();
     }
@@ -65,6 +78,32 @@ public class ResourceTest {
             catch (Exception ex) {
                 Assert.assertTrue(false);
             }
+        }
+
+        @Override
+        protected void initial() {
+        }
+    }
+    public static class Car3 extends Processable {
+
+        private final Resource res;
+
+        private final int driving;
+
+        public Car3(String id, Resource res, int driving) {
+            super(id);
+            this.res = res;
+            this.driving = driving;
+        }
+
+        @Override
+        protected void run() {
+            yield(env().timeout(this.driving));
+            System.out.println(getId() + " stop   at " + now());
+            yield(this.res.request(getId() + "_charge"));
+            System.out.println(getId() + " refuel at " + now());
+            yield(env().timeout(40));
+            System.out.println(getId() + " done   at " + now());
         }
 
         @Override

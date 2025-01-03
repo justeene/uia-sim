@@ -1,12 +1,9 @@
-package uia.cor;
+package uia.sim.resources;
 
+import org.junit.Test;
+import uia.cor.Yield2Way;
 import uia.sim.Env;
 import uia.sim.Event;
-import uia.sim.Processable;
-import uia.sim.resources.Container;
-import uia.sim.resources.Queue;
-
-import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * @author xiezhigang
@@ -16,10 +13,8 @@ import java.util.concurrent.LinkedBlockingQueue;
 public class TestProducer {
     private Env env;
     private Queue res;
-    public static void main(String[] args) {
-        new TestProducer().start();
-    }
-    public void start(){
+    @Test
+    public void test(){
         env = new Env();
         res=new Queue(env);
         env.process("producer",this::producer);
